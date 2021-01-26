@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--favicon icon-->
+    <link rel="shortcut icon" href="images/quote.png" type="image/x-icon">
+
+    <!--font awesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+        integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+        crossorigin="anonymous" />
+
+    <!--aos cdn-->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!--external css-->
+    <link href="css/style.css" rel="stylesheet">
+    <title>Quotes</title>
+</head>
+
+<body>
+
+    <div class="container bg-dark justify-content-center">
+        <div class="row" id="effect" data-aos="zoom-in">
+            <div class="col-md-10 col-12 offset-md-1 bg-white align-self-center">
+                <p class="number text-right">
+                    <img src="images/twitter.png" class="bird" alt="tweetMe" title="TweetMe" id="tweetme">
+                </p>
+
+                <div class="text">
+                    <i class="fas fa-quote-left"></i>
+                    <p class="quotes" id="quotes"></p>
+                    <p class="author text-right" id="author"></p>
+                </div>
+
+                <label class="button">
+                    <p class="btn btn-lg btn-success" id="newQuotes">New Quotes</p>
+
+                </label>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!--Footer-->
+    <footer>
+        <p>Created By Deepanshu 😎</p>
+    </footer>
+
+
+
+    <!--js aos cdn-->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script>
+        AOS.init();
+        const quote = document.getElementById("quotes");
+        const author = document.getElementById("author");
+        const tweetme = document.getElementById("tweetme");
+        const newQ = document.getElementById("newQuotes");
+        //let effect = document.getElementById("effect");
+        let realData = "";
+        let quotesData = "";
+
+        //effect.setAttribute("data-aos","zoom-in");
+
+        const getNewQuotes = () => {
+
+
+            let rnum = Math.floor(Math.random() * realData.length - 1);
+            quotesData = realData[rnum];
+
+            quote.innerText = `${quotesData.text}`;
+
+            if (quotesData.author == null) {
+                author.innerText = "unknown";
+            } else {
+                author.innerText = `${quotesData.author}`;
+            }
+        }
+
+        const tweetNow = () => {
+            let tweetPost = `https://twitter.com/intent/tweet?text=${quotesData.text}`;
+            window.open(tweetPost);
+        }
+
+
+        const getQuotes = async () => {
+            const api = "https://type.fit/api/quotes";
+
+            try {
+                let data = await fetch(api);
+                realData = await data.json();
+
+                getNewQuotes();
+            } catch (error) {
+
+            }
+        }
+
+        newQ.addEventListener("click", getNewQuotes);
+
+        tweetme.addEventListener("click", tweetNow);
+        getQuotes();
+
+    </script>
+
+</body>
+
+</html>

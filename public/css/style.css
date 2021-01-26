@@ -1,0 +1,96 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html{
+    font-size: 62.5%;
+} 
+
+body{
+    height: 100vh;
+    background-color: blueviolet;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.container{
+    width: 60%;
+    max-height: 70%;
+    margin-top: 100px;
+    margin-bottom: 30px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    border-radius: 3rem;
+}
+
+.col{
+    background-color: blue;
+    padding: 50px;
+}
+
+.number{
+    width: auto;
+    height: auto;
+}
+
+.bird{
+    margin-top: 5px;
+    max-width: 8%;
+    height: auto;
+    animation: rot 1s linear infinite alternate;
+    cursor: pointer;
+}
+
+.text{
+    padding: 5px;
+}
+
+.text .quotes{
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.text .author{
+    font-size: 1.4rem;
+    margin-right: 5px;
+    font-weight: 500;
+}
+
+@keyframes rot{
+    from{
+        transform: rotate(0deg);
+    }
+    to{
+        transform: rotate(360deg);
+    }
+}
+
+footer{
+    width: 100%;
+    background-color: black;
+    margin-top: auto;
+}
+
+footer p{
+    margin: 0;
+    text-align: center;
+    color: #fff;
+    line-height: 4rem;
+    font-size: 1.5rem;
+}
+
+
+
+@media screen and (max-width: 576px){
+    .container{
+        width: 90%;
+        height: auto;
+        margin-top: 80px;
+        margin-bottom: 20px;
+    }
+
+}
